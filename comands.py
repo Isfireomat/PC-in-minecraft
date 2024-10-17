@@ -1,5 +1,5 @@
 # Словарь команд с их значениями
-from memoryMainList import memoryMainList
+from memoryMainList import memoryMainList,memoryProgramList
 
 comands = {
     "stp": "00000000",  # остановиться  
@@ -73,22 +73,26 @@ def move_to_index(memory:memoryMainList,index:str):
         memory.move_byte()
 
         
-def mov(memory:memoryMainList,information:str,index:str):
+def mov(main_memory:memoryProgramList,memory:memoryMainList,information:str,index:str):
     move_to_index(memory,index)
     memory.memory=information
 
-def prc(memory:memoryMainList,information:str,index:str):
+def prc(main_memory:memoryProgramList,memory:memoryMainList,information:str,index:str):
     move_to_index(memory,information[-len(index):])
     print(next((k for k,v in alphabet.items() if v==memory.memory),None))
 
-def pri(memory:memoryMainList,information:str,index:str):
+def pri(main_memory:memoryProgramList,memory:memoryMainList,information:str,index:str):
     move_to_index(memory,information[-len(index):])
     print(next((k for k,v in numbers.items() if v==memory.memory),None))
+
+def jmp(main_memory:memoryProgramList,memory:memoryMainList,information:str,index:str):
+    while main_memory.position_str_byte!=information[-len(index):]:
+        main_memory.move_byte()
     
 binary_comands={
     "00000000":"stop",
     "00000001":mov,
-    "00000010":0,
+    "00000010":jmp,
     "00000011":prc,
     "00000100":pri
 }

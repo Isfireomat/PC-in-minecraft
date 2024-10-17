@@ -51,7 +51,7 @@ def run(memory: memoryProgramList,second_memory:memoryMainList):
     
     while int(memory.memory_comands):
         # print(memory.memory_comands,memory.memory,memory.memory_index)
-        binary_comands[memory.memory_comands](second_memory,memory.memory,memory.memory_index)
+        binary_comands[memory.memory_comands](memory,second_memory,memory.memory,memory.memory_index)
         memory.move_byte()
     
     
@@ -67,6 +67,7 @@ if __name__=="__main__":
         mov е 14
         mov т 15
         mov 0 16
+        prc 16
         prc 0
         prc 10
         prc 20
@@ -77,6 +78,8 @@ if __name__=="__main__":
         pri 16
         pri 13
         pri 14
+        prc 16
+        jmp 7
         """
     compilate(program,memory)
     print(memory)
